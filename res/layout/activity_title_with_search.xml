@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout
+        android:id="@+id/title"
+        style="@style/TitleBar"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/title"
+            style="@style/TitleBar"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/backImage"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginRight="50dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/activityTitle"
+                style="@style/TitleBarText"
+                android:fontFamily="sans-serif-condensed" 
+                android:gravity="center" />
+
+            <EditText
+                android:id="@+id/searchTree"
+                style="@style/TitleBarText"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="Search" />
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:adjustViewBounds="true"
+                android:src="@drawable/search" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="#d3d3d3"
+            android:paddingLeft="20dp" />
+    </LinearLayout>
+
+</merge>
