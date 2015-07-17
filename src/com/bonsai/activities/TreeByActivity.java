@@ -28,6 +28,8 @@ import android.widget.ListView;
 import com.bonsai.common.DashboardAdapter;
 import com.bonsai.common.Item;
 import com.bonsai.common.SearchParams;
+import com.bonsai.dao.BonsaiDAO;
+import com.bonsai.dao.BonsaiDBHelper;
 import com.example.bonsai.R;
 
 public class TreeByActivity extends BaseActivity{
@@ -116,7 +118,12 @@ public class TreeByActivity extends BaseActivity{
 				/*Bundle extras = parentIntent.getExtras();
 				extras.putString("value", item.getEnglishName());
 				intent.putExtras(extras);*/
-				parentParams.setSearchValue1(item.getEnglishName());	
+				if(BonsaiDBHelper.COLUMN_NAME_RAASI.equalsIgnoreCase(parentParams.getSearchColumn()) || 
+						BonsaiDBHelper.COLUMN_NAME_STAR.equalsIgnoreCase(parentParams.getSearchColumn()))
+					parentParams.setSearchValue1(String.valueOf(item.getId()));
+				else
+					parentParams.setSearchValue1(String.valueOf(item.getEnglishName()));
+				parentParams.setPageValue(item.getEnglishName());
 				intent.putExtra("params", parentParams);
 				startActivity(intent);
 			}
@@ -125,49 +132,6 @@ public class TreeByActivity extends BaseActivity{
 		searchIcon = (ImageView) findViewById(R.id.search);
 		searchTree = (EditText) findViewById(R.id.searchTree);
 		searchTree.setVisibility(View.GONE);
-		/*if(!DBHelper.COLUMN_NAME_STYLE.equalsIgnoreCase(parentActivity)){
-			searchIcon.setVisibility(View.GONE);
-			return;
-		}
-
-		searchIcon.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				searchTree.setVisibility(View.VISIBLE);
-				findViewById(R.id.activityTitle).setVisibility(View.GONE);
-			}
-		});
-
-
-		searchTree.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				v.setFocusable(true);
-				v.setFocusableInTouchMode(true);
-				return false;
-			}
-		});
-
-		searchTree.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-				// When user changed the Text
-				TreeByRaasiActivity.this.customGridAdapter.getFilter().filter(cs);   
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable arg0) {
-			}
-		});
-
-*/
 	}
 
 	@Override

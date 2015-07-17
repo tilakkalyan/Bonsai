@@ -9,6 +9,7 @@ public class SearchParams implements Serializable{
 	private String searchColumn = "Name";
 	private String searchValue1;
 	private String searchValue2;
+	private String pageValue;
 	
 	public SearchParams(){
 		this.searchColumn = "Name";
@@ -59,6 +60,14 @@ public class SearchParams implements Serializable{
 	
 	public static SearchParams byDate(){
 		return new SearchParams(BonsaiDAO.COLUMN_NAME_DATE);
+	}
+
+	public String getPageValue() {
+		return pageValue;
+	}
+
+	public void setPageValue(String pageValue) {
+		this.pageValue = pageValue;
 	}
 
 }

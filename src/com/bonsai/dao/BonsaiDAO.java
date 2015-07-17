@@ -55,8 +55,8 @@ public class BonsaiDAO extends SQLiteOpenHelper{
 	public static String[] ALL_COLUMNS = { "id", "scientific_name", "date", "english_name", "sanskrit_name", "telugu_name", "kannada_name", "origin", "english_raaga", "sanskrit_raaga", "rasi", "rishi", "planet", "star", "style"};
 	public static String[] BRIEF_COLUMNS = {COLUMN_NAME_ID, COLUMN_NAME_ENGLISH_NAME, COLUMN_NAME_SCIENTIFIC_NAME, COLUMN_NAME_DATE.toLowerCase()};
 
-	public final static String RAASI_SELECT_SQL = "select rasi cData  from raasi";
-	public final static String STARS_SELECT_SQL = "select star cData  from stars";
+	public final static String RAASI_SELECT_SQL = "select id, rasi cData  from raasi";
+	public final static String STARS_SELECT_SQL = "select id, star cData  from stars";
 
 	private static List<Item> listOfRaasis = new ArrayList<Item>();
 	private static List<Item> listOfStars = new ArrayList<Item>();
@@ -208,7 +208,7 @@ public class BonsaiDAO extends SQLiteOpenHelper{
 			return getStars();
 		}
 
-		String selectQuery = "select distinct " + columnName + " cData  from Bonsai  order by  lower(cData)";
+		String selectQuery = "select distinct " + columnName + " cData , " + columnName + " from Bonsai  order by  lower(cData)";
 		Cursor cursor = bonsaiDB.rawQuery(selectQuery, null);
 		return getItems(new SingleColumnMapper(), cursor);
 	}
@@ -227,8 +227,9 @@ public class BonsaiDAO extends SQLiteOpenHelper{
 
 		Cursor cursor = null;
 		String searchParam[] = null;
-		if(searchParameters.getSearchValue1()!=null)
-			searchParam = new String[]{searchParameters.getSearchValue1()};
+		if(searchParameters.getSearchValue1()!=null){
+				searchParam = new String[]{searchParameters.getSearchValue1()};
+		}
 
 		cursor = bonsaiDB.query(BonsaiDAO.TABLE_BONSAI, BonsaiDAO.BRIEF_COLUMNS, condition(searchParameters), searchParam,  null, null, null);
 		List<Item> listOfTrees = getItems(new BriefRowMapper(), cursor); 
@@ -240,7 +241,8 @@ public class BonsaiDAO extends SQLiteOpenHelper{
 		if(params.getSearchColumn()==null || params.getSearchValue1()==null)
 			return null;
 
-		return params.getSearchColumn().toLowerCase() + " = ?";
+			return params.getSearchColumn().toLowerCase() + " = ?";
+		
 	}
 
 	private Item mapRow(RowMapper<Item> t, Cursor cursor){

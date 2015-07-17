@@ -66,7 +66,7 @@ public class TreeNameActivity extends BaseActivity{
 			listSize = gridArray.size();
 
 		if(value!=null && value.trim().length()>0){
-			setTitle(value + " (" + listSize + ") ");
+			setTitle(params.getPageValue() + " (" + listSize + ") ");
 		}
 		else{
 			setTitle("By Names ("+ listSize + ")");
@@ -78,10 +78,10 @@ public class TreeNameActivity extends BaseActivity{
 
 		searchTree = (EditText) findViewById(R.id.searchTree);
 		searchTree.setVisibility(View.GONE);
+		searchIcon = (ImageView) findViewById(R.id.search);
 
 		if(listSize>0){
 
-			searchIcon = (ImageView) findViewById(R.id.search);
 
 			searchIcon.setOnClickListener(new View.OnClickListener() {
 
